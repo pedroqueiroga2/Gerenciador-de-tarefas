@@ -4,9 +4,18 @@ namespace Gerenciador
     {
         private List<string> tarefas;
 
-        public void AdicionarTarefa(string tarefas)
+        public  void GerenciadorTarefas()
         {
-            tare
+            tarefas = new List<string>();
+        }
+        public void AdicionarTarefa(string tarefa)
+        {
+            tarefas.Add(tarefa);
+            Console.WriteLine(tarefa);
+        }
+        public void ExcluirTarefa(string tarefa)
+        {
+            tarefas.Remove()
         }
     }
 }
