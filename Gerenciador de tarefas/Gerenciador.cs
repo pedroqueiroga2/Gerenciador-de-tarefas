@@ -29,7 +29,8 @@ namespace Gerenciador
             tarefas = new List<Tarefa>();
 
         }
-        public void AdicionarTarefa(string tarefa)
+
+        public void AdicionarTarefa()
         {
             Console.WriteLine($"Informe a tarefa");
             string nome = Console.ReadLine();
@@ -38,17 +39,18 @@ namespace Gerenciador
 
 
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine($"{ID} - {tarefa}" + " \nAdicionado com sucesso!");
+            Console.WriteLine($"{ID} - {nome}" + " \nAdicionado com sucesso!");
             Console.ResetColor();
             ID++;
 
 
         }
 
-        public void ExcluirTarefa(int i) //criando metodo para excluir a tarefa
+        public void ExcluirTarefa() //criando metodo para excluir a tarefa
         {
+
             Console.WriteLine($"Informe a tarefa que deseja excluir");
-            if (int.TryParse(Console.ReadLine(), out i))
+            if (int.TryParse(Console.ReadLine(), out int i))
             {
                 Tarefa tarefa = tarefas.Find(t => t.Id == i); //utilizando expressão lambda para retornar um valor correspondente dentro da lista de tarefas
                 {
@@ -59,32 +61,55 @@ namespace Gerenciador
                         Console.WriteLine($"Tarefa removida");
                         Console.ResetColor();
                     }
-                    else{
-
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"erro");
+                        Console.ResetColor();
                     }
                 }
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"erro");
+                Console.ResetColor();
             }
 
         }
+        public void mostrarTarefa()
+        {
+            if (tarefas.Count == 0) //verifica se a lista possui algo dentro
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Nenhuma tarefa cadastrada.");
+                Console.ResetColor();
+                return;
+            }
 
-        // public void mostrarTarefa()
-        // {
-        //     if (tarefas.Count == 0)
-        //     {
-        //         Console.WriteLine("Nenhum texto encontrado.");
-        //     }
-        //     else
-        //     {
-        //         Console.WriteLine("Tarefas:");
-        //         foreach (var tarefa in tarefas)
-        //         {
-        //             Console.WriteLine(tarefa);
-        //         }
-        //     }
-        // }
+            Console.WriteLine("Lista de Tarefas:");
+            foreach (var tarefa in tarefas)
+            {
+                
+                string status = tarefa.Status ? "[Concluído]" : "[Pendente]";
+                Console.WriteLine($"{tarefa.Id} - {tarefa.Nome} {status}");
+                Console.ResetColor();
+            }
+        }
+        public void Concluir()
+        {
+            Console.WriteLine("Informe ID da tarefa");
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                Tarefa tarefa1 = tarefas.Find(t => t.Id == id);
+
+                tarefa1.Concluir(); // Chama o método que altera o status para true
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"Tarefa {id} concluída com sucesso!");
+                Console.ResetColor();
+            }
+        }
+
+
     }
 }
