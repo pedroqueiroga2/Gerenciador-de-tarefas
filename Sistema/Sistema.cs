@@ -35,14 +35,35 @@ namespace sistema
         }
         public void Imprimir()
         {
-            
-            using (StreamWriter bloco = new StreamWriter("C:\\Users\\Alunos\\3D Objects\\Gerenciador-de-tarefas\\Sistema\\Dados.txt"))
+
+            using (StreamWriter bloco = new StreamWriter("C:\\Users\\Alunos\\3D Objects\\Gerenciador-de-tarefas\\Sistema\\Dados.csv", append: true))
             {
                 Usuario();
-                bloco.WriteLine(pessoa1.Nome + " " + pessoa1.Sobrenome + "  \n" + pessoa1.Idade);
+                bloco.WriteLine($"{pessoa1.Nome} {pessoa1.Sobrenome};{pessoa1.Idade}");
                 bloco.Close();
             }
         }
+        public void ler()
+        {
+            using (StreamReader x = new StreamReader("C:\\Users\\Alunos\\3D Objects\\Gerenciador-de-tarefas\\Sistema\\Dados.csv"))
+            {
+                string line = x.ReadLine();
+                if (line != null & File.ReadAllText("C:\\Users\\Alunos\\3D Objects\\Gerenciador-de-tarefas\\Sistema\\Dados.csv").Length == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(line);
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("O arquivo está em branco ou não existe");
+                    Console.ResetColor();
+                }
+
+            }
+        }
+
 
     }
 }
