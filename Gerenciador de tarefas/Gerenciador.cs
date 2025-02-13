@@ -90,8 +90,8 @@ namespace Gerenciador
             Console.WriteLine("Lista de Tarefas:");
             foreach (var tarefa in tarefas)
             {
-                
-                string status = tarefa.Status ? "[Concluído]" : "[Pendente]";
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                string status = tarefa.Status ? "[x]" : "[]";
                 Console.WriteLine($"{tarefa.Id} - {tarefa.Nome} {status}");
                 Console.ResetColor();
             }

@@ -1,7 +1,7 @@
 ﻿using Gerenciador;
-
+Console.Clear();
 Gerencia x = new Gerencia();
-
+x.mostrarTarefa();
 
 while(true)
 {
